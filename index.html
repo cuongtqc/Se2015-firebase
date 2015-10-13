@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/animate.min.css" />
+		<link rel="stylesheet" href="css/main.css" /> 
+
+		<script src="js/system/jquery.min.js"> </script>
+		<script src="js/system/bootstrap.min.js"> </script>
+		<script src="js/system/angular.min.js"> </script>
+		<script src="js/system/angular-animate.min.js"> </script>
+		<script src="js/system/firebase.js"> </script>
+		<script src="js/system/wow.min.js"> </script>
+		<script src="js/system/angularfire.min.js"> </script>
+		
+		<script src="js/main.js"> </script>
+    </head>
+	
+	
+    <body ng-app="Quiz" class="container-fluid">
+	
+		<div id="LoginTab" ng-controller="LoginForm" class="container-fluid wow fadeInDown" ng-show="true">
+			<div class="row" id="signInList">
+				<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
+					<input type="email" class="form-control input-lg input-login" ng-model="username" placeholder="Email">
+				</div>
+				<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
+					<input type="password" class="form-control input-lg input-login" ng-model="password" placeholder="Password">
+				</div>
+				<button type="button" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="">Log in</button>
+				<button type="submit" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="">Register</button>
+			</div>
+		</div>
+	
+		<div ng-controller="TopicController" class="container-fluid wow slideInLeft" ng-show="true">
+			<div class="row no-gutter">
+				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="topic in menu">
+					<a href="{{ topic.link }}" class="card-box">
+						<img src="{{ topic.icon }}" class="img" alt="{{ topic.tittle }}">
+						<div class="card-box-caption">
+							<div class="card-box-caption-content">
+								<div class="project-category text-faded">
+									<h3>{{ topic.tittle }}</h3>
+								</div>
+								<div class="project-name">
+									{{ topic.description }}
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+
+    </body>
+</html>

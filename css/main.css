@@ -1,0 +1,148 @@
+body {
+	font-family: 'Aleo';
+}
+
+.no-gutter > [class*=col-] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.btn {
+	border-radius: 0px;
+}
+
+.input-login {
+	border-radius: 0px;
+}
+
+.img {
+	height: 100%;
+	width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.input-group {
+	border-radius: 0px;
+}
+
+/* log in css */
+.btn-login {
+	color: #00abff;
+	background-color: #ffffff;
+	border: 1px solid #00abff;
+}
+
+.btn-login:hover {
+	background-color: #00abff;
+	border: 1px solid #fff;
+	color: #fff;
+	-webkit-transition: all .5s;
+    -moz-transition: all .5s;
+}
+
+#LoginTab {
+	background-color: #00abff;
+	color: #ffffff;
+	border-bottom: 1px solid #00abff;
+}
+
+/* ng-show and ng-hide animation */
+.ng-hide-remove {
+	animation: bounceIn 1s;
+}
+
+/* topic card design */
+.card-box {
+    display: block;
+    position: relative;
+}
+
+.card-box .card-box-caption {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    background: #00abff;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+
+.card-box .card-box-caption .card-box-caption-content {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.card-box .card-box-caption .card-box-caption-content .project-category,
+.card-box .card-box-caption .card-box-caption-content .project-name {
+    padding: 0 15px;
+    font-family: 'Aleo',Arial,sans-serif;
+}
+
+.card-box .card-box-caption .card-box-caption-content .project-category {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-box .card-box-caption .card-box-caption-content .project-name {
+    font-size: 18px;
+}
+
+.card-box:hover .card-box-caption {
+    opacity: 1;
+}
+
+@media(min-width:768px) {
+    .card-box .card-box-caption .card-box-caption-content .project-category {
+        font-size: 16px;
+    }
+
+    .card-box .card-box-caption .card-box-caption-content .project-name {
+        font-size: 22px;
+    }
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: normal;
+  font-weight: normal;
+  src: 	url('fonts/Aleo.woff') format('woff'),  
+		url("fonts/Aleo.woff2") format("woff2"),
+		url("fonts/Aleo.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: normal;
+  font-weight: bold;
+  src: 	url('fonts/Bold.woff') format('woff'),  
+		url("fonts/Bold.woff2") format("woff2"),
+		url("fonts/Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: italic;
+  font-weight: normal;
+  src: 	url('fonts/Italic.woff') format('woff'),  
+		url("fonts/Italic.woff2") format("woff2"),
+		url("fonts/Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: italic;
+  font-weight: bold;
+  src: 	url('fonts/BoldItalic.woff') format('woff'),  
+		url("fonts/BoldItalic.woff2") format("woff2"),
+		url("fonts/BoldItalic.ttf") format("truetype");
+}

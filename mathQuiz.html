@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/animate.min.css" />
+		<link rel="stylesheet" href="css/main.css" /> 
+		<link rel="stylesheet" href="css/quiz.css" /> 
+
+		<script src="js/system/jquery.min.js"> </script>
+		<script src="js/system/bootstrap.min.js"> </script>
+		<script src="js/system/angular.min.js"> </script>
+		<script src="js/system/angular-animate.min.js"> </script>
+		<script src="js/system/wow.min.js"> </script>
+		<script src="js/system/firebase.js"> </script>
+		<script src="js/system/angularfire.min.js"> </script>
+		
+		<script src="js/main.js"> </script>
+		<script src="js/quiz.js"> </script>
+    </head>
+	
+    <body ng-app="Quiz" class="container-fluid">
+	
+		<div id="LoginTab" ng-controller="LoginForm" class="container-fluid wow fadeInDown" ng-show="true">
+			<div class="row" id="signInList">
+				<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
+					<input type="email" class="form-control input-lg input-login" ng-model="username" placeholder="Email">
+				</div>
+				<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
+					<input type="password" class="form-control input-lg input-login" ng-model="password" placeholder="Password">
+				</div>
+				<button type="button" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="">Log in</button>
+				<button type="submit" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="">Register</button>
+			</div>
+		</div>
+		
+		<div ng-controller="QuestLibrary" class="container-fluid wow fadeInLeft" id="questionBoard">
+			<div class="row" ng-show="editDB">
+				<a href="addMathQuestion.html" class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12">Edit question bank</a>
+				<div class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-click="takeTest()">Take test</div>
+			</div>
+			
+			<div ng-show="publish && !editDB">
+				<p class="question-style"> {{ currentQuestion.data }} </p>
+				<div class="row">
+					<div class="btn btn-answer col-lg-3 col-sm-6 col-xs-12" ng-repeat="ans in currentQuestion.answer" ng-click="select($index)" ng-class="{sel: $index == selected}"> 
+						{{ ans }} 
+					</div>
+				</div>
+				<div class="btn btn-answer marginTop pull-left" ng-click="ReturnQuiz()"> Return </div>
+				<div class="btn btn-answer marginTop pull-right" ng-click="submitQuestion()"> Submit </div>
+			</div>
+			
+			<div ng-show="!publish && !editDB">
+				<p class="question-style"> Your score is {{ score }} </p>
+				<div ng-repeat="question in list">
+					<p class="question-style"> {{ question.data }} </p>
+					<p class="btn-answer col-lg-3 col-xs-6 col-xs-12" ng-repeat="ans in question.answer" 
+						ng-class="{sel: $index == getSel($parent.$index),right: $index == getRight($parent.$index),good:$index == getRight($parent.$index) && $index == getSel($parent.$index) }"> 
+						{{ ans }} 
+					</p>
+				</div>
+				<div class="btn btn-login btn-lg col-lg-2 col-lg-offset-10 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-12" ng-click="ReturnQuiz()"> Return </div>
+			</div>
+		</div>
+
+    </body>
+</html>

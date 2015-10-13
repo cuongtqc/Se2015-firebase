@@ -1,0 +1,91 @@
+body {
+	font-family: 'Aleo';
+}
+
+.question-style {
+	text-align: center;
+	font-size: 3em;
+	color: #000000;
+	margin: auto;
+}
+
+.question-tittle {
+	font-size: 3em;
+	color: #000000;
+	margin: auto;
+}
+
+.btn-answer {
+	background-color: #ffffff;
+	color: #000000;
+	text-align: center;
+	font-size: 2em;
+	border: 1px solid #0051ff;
+}
+
+.btn-answer:hover {
+	background-color: #0051ff;
+	color: #ffffff;
+	-webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+
+.marginTop {
+	margin-top: 1em;
+}
+
+.sel {
+	background-color: #0051ff;
+	color: #ffffff;
+}
+
+.right {
+	background-color: #ff0000;
+	color: #ffffff; 
+}
+
+.good {
+	background-color: #00FF7F;
+	color: #000000; 
+}
+
+#questionBoard {
+	margin-top: 50px;
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: normal;
+  font-weight: normal;
+  src: 	url('fonts/Aleo.woff') format('woff'),  
+		url("fonts/Aleo.woff2") format("woff2"),
+		url("fonts/Aleo.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: normal;
+  font-weight: bold;
+  src: 	url('fonts/Bold.woff') format('woff'),  
+		url("fonts/Bold.woff2") format("woff2"),
+		url("fonts/Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: italic;
+  font-weight: normal;
+  src: 	url('fonts/Italic.woff') format('woff'),  
+		url("fonts/Italic.woff2") format("woff2"),
+		url("fonts/Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: italic;
+  font-weight: bold;
+  src: 	url('fonts/BoldItalic.woff') format('woff'),  
+		url("fonts/BoldItalic.woff2") format("woff2"),
+		url("fonts/BoldItalic.ttf") format("truetype");
+}

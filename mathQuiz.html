@@ -17,7 +17,7 @@
 		<script src="js/system/angularfire.min.js"> </script>
 		
 		<script src="js/main.js"> </script>
-		<script src="js/quiz.js"> </script>
+		<script src="js/math/quiz.js"> </script>
     </head>
 	
     <body ng-app="Quiz" class="container-fluid">
@@ -37,11 +37,11 @@
 		
 		<div ng-controller="QuestLibrary" class="container-fluid wow fadeInLeft" id="questionBoard">
 			<div class="row" ng-show="editDB">
-				<a href="addMathQuestion.html" class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12">Edit question bank</a>
+				<a href="editMathQuestion.html" class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12">Edit question bank</a>
 				<div class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-click="takeTest()">Take test</div>
 			</div>
 			
-			<div ng-show="publish && !editDB">
+			<div ng-show="publish && !editDB && loaded">
 				<p class="question-style"> {{ currentQuestion.data }} </p>
 				<div class="row">
 					<div class="btn btn-answer col-lg-3 col-sm-6 col-xs-12" ng-repeat="ans in currentQuestion.answer" ng-click="select($index)" ng-class="{sel: $index == selected}"> 
@@ -52,7 +52,7 @@
 				<div class="btn btn-answer marginTop pull-right" ng-click="submitQuestion()"> Submit </div>
 			</div>
 			
-			<div ng-show="!publish && !editDB">
+			<div ng-show="!publish && !editDB && loaded">
 				<p class="question-style"> Your score is {{ score }} </p>
 				<div ng-repeat="question in list">
 					<p class="question-style"> {{ question.data }} </p>

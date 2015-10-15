@@ -22,15 +22,23 @@
     <body ng-app="Quiz" class="container-fluid">
 	
 		<div id="LoginTab" ng-controller="LoginForm" class="container-fluid wow fadeInDown" ng-show="true">
-			<div class="row" id="signInList">
+			<div class="row" ng-hide="loged">
 				<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
 					<input type="email" class="form-control input-lg input-login" ng-model="username" placeholder="Email">
 				</div>
 				<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
 					<input type="password" class="form-control input-lg input-login" ng-model="password" placeholder="Password">
 				</div>
-				<button type="button" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="">Log in</button>
-				<button type="submit" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="">Register</button>
+				<button type="button" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="LogIn()">Log in</button>
+				<button type="submit" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="Register()">Register</button>
+			</div>
+			<div class="row" ng-show="loged">
+				<div class="col-lg-10 col-md-8 col-sm-6 col-xs-6">
+					<p class="input-login"> Hi {{ user.name }} </p>
+				</div>
+				<button type="button" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-3 col-xs-3" 
+					ng-click="">Profile</button>
+				<button type="button" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-3 col-xs-3" ng-click="">Log Out</button>
 			</div>
 		</div>
 	

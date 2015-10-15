@@ -3,11 +3,58 @@ new WOW().init();
 var app = angular.module('Quiz', ['ngAnimate' , 'firebase']);
 var ref = new Firebase("https://se15.firebaseio.com");
 
-app.controller( 'LoginForm', function( $scope ) {
-	/* form control */
+app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth ) {
+	/* user control */
 	$scope.username = "";
 	$scope.password = "";
+	$scope.user = {
+		uid: "",
+		name: "",
+		score: 0
+	}
+	$scope.score = 0;
+	
+	/* form control */
+	$scope.loged = false;
+	var link = new Firebase("https://se15.firebaseio.com/users");
+	var userList = $firebaseArray( link );
 
+	$scope.Register = function() {
+		ref.createUser({
+			email    : $scope.username,
+			password : $scope.password
+		}, function( error, authData ) {
+			if ( error ) {
+				alert("Register Failed:" + error.message );
+				$scope.LogIn();
+			} else {
+				console.log("Authenticated successfully with payload:", authData);
+				$scope.user.uid = authData.uid;
+				userList.$add( $scope.user );
+				$scope.LogIn();
+			}
+		});
+	}
+	$scope.LogIn = function() {
+		ref.authWithPassword({
+			email    : $scope.username,
+			password : $scope.password
+		}, function( error, authData ) {
+			if ( error ) {
+				alert("Log in Failed:" + error.message   );
+			} else {
+				for( var i = 0; i < userList.length; i ++ ) 
+				if ( userList[i].uid == authData.uid ) {
+					$scope.user = userList[i];
+				}
+				console.log( $scope.user );
+				console.log("Log in successfully with payload:", authData);
+				$scope.$apply( function(){
+					$scope.loged = true;
+				});
+			}
+		});
+	}
 });
 
 app.controller('TopicController', function( $scope ) {

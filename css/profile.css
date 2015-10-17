@@ -1,0 +1,78 @@
+body {
+	font-family: 'Aleo';
+}
+
+/* ng-show and ng-hide animation */
+.ng-hide-remove {
+	animation: bounceIn 1s;
+}
+
+.ng-hide-add {
+	animation: bounceOut 1s;
+}
+
+.input-user {
+	font-size: 1.5em;
+	color: #000000;
+	margin: auto;
+	margin-top: 1em;
+}
+
+.btn-user {
+	font-size: 2em;
+	background-color: #00abff;
+	color: #ffffff;
+	margin: auto;
+	margin-top: 1em;
+}
+
+.btn-user:hover {
+	background-color: #BAFF1E;
+	color: #000000;
+	transition: all .5s;
+	-webkit-transition: all .5s;
+    -moz-transition: all .5s;
+}
+
+#userTab {
+	background-color: #00abff;
+	color: #ffffff;
+	border-bottom: 1px solid #00abff;
+	font-size: 2em;
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: normal;
+  font-weight: normal;
+  src: 	url('fonts/Aleo.woff') format('woff'),  
+		url("fonts/Aleo.woff2") format("woff2"),
+		url("fonts/Aleo.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: normal;
+  font-weight: bold;
+  src: 	url('fonts/Bold.woff') format('woff'),  
+		url("fonts/Bold.woff2") format("woff2"),
+		url("fonts/Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: italic;
+  font-weight: normal;
+  src: 	url('fonts/Italic.woff') format('woff'),  
+		url("fonts/Italic.woff2") format("woff2"),
+		url("fonts/Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Aleo';
+  font-style: italic;
+  font-weight: bold;
+  src: 	url('fonts/BoldItalic.woff') format('woff'),  
+		url("fonts/BoldItalic.woff2") format("woff2"),
+		url("fonts/BoldItalic.ttf") format("truetype");
+}

@@ -36,15 +36,25 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 		if ( !authData ) return $scope.userDef;
 		for( var i = 0; i < userList.length; i ++ ) 
 		if ( userList[i].uid == authData.uid ) {
+			console.log( 1111 );
 			var x = {
 				uid: authData.uid,
 				name: userList[i].name,
 				score: userList[i].score
 			}
+			console.log( x );
 			return x;
 		}
 	}
-	$scope.user = $scope.getUser( $scope.loged );
+	userList.$loaded(
+		function( data ) {
+			$scope.user = $scope.getUser( $scope.loged );
+			console.log( $scope.loged );
+		},
+		function(error) {
+			console.error("Error:", error);
+		}
+	);
 	
 	$scope.Register = function() {
 		ref.createUser({

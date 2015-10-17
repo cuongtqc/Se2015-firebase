@@ -3,6 +3,16 @@ new WOW().init();
 var app = angular.module('Quiz', ['ngAnimate' , 'firebase']);
 var ref = new Firebase("https://se15.firebaseio.com");
 
+function authDataCallback( authData ) {
+	if ( authData ) {
+		console.log("User " + authData.uid + " is logged in with " + authData.provider);
+		return authData;
+	} else {
+		console.log("User is logged out");
+	}
+}
+ref.onAuth(authDataCallback);
+
 app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth ) {
 	/* user control */
 	$scope.username = "";
@@ -12,13 +22,30 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 		name: "",
 		score: 0
 	}
-	$scope.score = 0;
-	
+	$scope.userDef = {
+		uid: "",
+		name: "",
+		score: 0
+	}
 	/* form control */
-	$scope.loged = false;
+	$scope.score = 0;
+	$scope.loged = ref.getAuth();
 	var link = new Firebase("https://se15.firebaseio.com/users");
 	var userList = $firebaseArray( link );
-
+	$scope.getUser = function( authData ) {
+		if ( !authData ) return $scope.userDef;
+		for( var i = 0; i < userList.length; i ++ ) 
+		if ( userList[i].uid == authData.uid ) {
+			var x = {
+				uid: authData.uid,
+				name: userList[i].name,
+				score: userList[i].score
+			}
+			return x;
+		}
+	}
+	$scope.user = $scope.getUser( $scope.loged );
+	
 	$scope.Register = function() {
 		ref.createUser({
 			email    : $scope.username,
@@ -54,6 +81,10 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 				});
 			}
 		});
+	}
+	$scope.LogOut = function() {
+		ref.unauth();
+		$scope.loged = false;
 	}
 });
 

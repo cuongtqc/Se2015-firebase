@@ -13,6 +13,12 @@ function authDataCallback( authData ) {
 }
 ref.onAuth(authDataCallback);
 
+app.controller( 'Leaderboard', function( $scope , $firebaseArray ) {
+	/* form control */
+	var link = new Firebase("https://se15.firebaseio.com/users");
+	$scope.userList = $firebaseArray( link );
+});
+
 app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth ) {
 	/* user control */
 	$scope.username = "";
@@ -31,22 +37,20 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 	$scope.score = 0;
 	$scope.loged = ref.getAuth();
 	var link = new Firebase("https://se15.firebaseio.com/users");
-	var userList = $firebaseArray( link );
+	$scope.userList = $firebaseArray( link );
 	$scope.getUser = function( authData ) {
 		if ( !authData ) return $scope.userDef;
-		for( var i = 0; i < userList.length; i ++ ) 
-		if ( userList[i].uid == authData.uid ) {
-			console.log( 1111 );
+		for( var i = 0; i < $scope.userList.length; i ++ ) 
+		if ( $scope.userList[i].uid == authData.uid ) {
 			var x = {
 				uid: authData.uid,
-				name: userList[i].name,
-				score: userList[i].score
+				name: $scope.userList[i].name,
+				score: $scope.userList[i].score
 			}
-			console.log( x );
 			return x;
 		}
 	}
-	userList.$loaded(
+	$scope.userList.$loaded(
 		function( data ) {
 			$scope.user = $scope.getUser( $scope.loged );
 			console.log( $scope.loged );
@@ -67,7 +71,7 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
 				$scope.user.uid = authData.uid;
-				userList.$add( $scope.user );
+				$scope.userList.$add( $scope.user );
 				$scope.LogIn();
 			}
 		});
@@ -80,9 +84,9 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 			if ( error ) {
 				alert("Log in Failed:" + error.message   );
 			} else {
-				for( var i = 0; i < userList.length; i ++ ) 
-				if ( userList[i].uid == authData.uid ) {
-					$scope.user = userList[i];
+				for( var i = 0; i < $scope.userList.length; i ++ ) 
+				if ( $scope.userList[i].uid == authData.uid ) {
+					$scope.user = $scope.userList[i];
 				}
 				console.log( $scope.user );
 				console.log("Log in successfully with payload:", authData);

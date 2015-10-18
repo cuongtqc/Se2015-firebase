@@ -45,6 +45,32 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 	$scope.takeTest = function() {
 		$scope.editDB = false;
 	}
+	
+	// user control
+	$scope.name = "";
+	$scope.userIndex = 0;
+	$scope.loged = ref.getAuth();
+	$scope.loaded = false;
+	var link = new Firebase("https://se15.firebaseio.com/users");
+	var userList = $firebaseArray( link );
+	$scope.getUser = function( authData ) {
+		if ( !authData ) return $scope.userDef;
+		for( var i = 0; i < userList.length; i ++ ) 
+		if ( userList[i].uid == authData.uid ) {
+			$scope.score = userList[i].score;
+			$scope.name = userList[i].name;
+			return i;
+		}
+	}
+	userList.$loaded(
+		function( data ) {
+			$scope.userIndex = $scope.getUser( $scope.loged );
+			$scope.loaded = true;
+		},
+		function(error) {
+			console.error("Error:", error);
+		}
+	);
 
 	// synchronize data from server
 	var math = new Firebase("https://se15.firebaseio.com/math");
@@ -85,6 +111,17 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 	/* publish score and question */
 	$scope.submitTest = function() {
 		$scope.publish = false;
+		userList.$loaded(
+			function( data ) {
+				userList[$scope.userIndex].score += $scope.score;
+				userList.$save( $scope.userIndex ).then( function() {
+					console.log( "Save user's score successfully!")
+				});
+			},
+			function(error) {
+				console.error("Error:", error);
+			}
+		);
 	}
 	
 	/* class for selected answer and right answer */

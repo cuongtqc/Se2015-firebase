@@ -21,7 +21,6 @@ app.controller( 'UserProfile', function( $scope , $firebaseArray , $firebaseAuth
 	$scope.currentPassword = "";
 	$scope.userIndex = 0;
 	$scope.loaded = false;
-	$scope.score = 0;
 	
 	/* get user */
 	$scope.score = 0;

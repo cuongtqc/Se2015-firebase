@@ -49,6 +49,21 @@ body {
 	border-bottom: 1px solid #00abff;
 }
 
+/* Leaderboard */
+#leaderboard {
+	background-color: #2a2e49;
+	color: #ffffff;
+	border-bottom: 1px solid #00abff;
+}
+
+.leaderboard-tittle {
+	font-size: 2em;
+}
+
+.leaderboard-user {
+	font-size: 1.5em;
+}
+
 /* ng-show and ng-hide animation */
 .ng-hide-remove {
 	animation: bounceIn 1s;

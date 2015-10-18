@@ -57,7 +57,6 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 		if ( !authData ) return $scope.userDef;
 		for( var i = 0; i < userList.length; i ++ ) 
 		if ( userList[i].uid == authData.uid ) {
-			$scope.score = userList[i].score;
 			$scope.name = userList[i].name;
 			return i;
 		}
@@ -117,11 +116,12 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 				userList.$save( $scope.userIndex ).then( function() {
 					console.log( "Save user's score successfully!")
 				});
+				$scope.score = 0;
 			},
 			function(error) {
 				console.error("Error:", error);
 			}
-		);
+		);	
 	}
 	
 	/* class for selected answer and right answer */
@@ -140,6 +140,7 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 		$scope.publish = true;
 		$scope.editDB = true;
 		$scope.index = 0;
+		$scope.score = 0;
 		regen( bank.length , $scope.max );
 		$scope.currentQuestion = bank[ QuestArr[0] ];
 	}

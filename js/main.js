@@ -25,7 +25,7 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 	$scope.password = "";
 	$scope.user = {
 		uid: "",
-		name: "",
+		name: "unknown",
 		score: 0
 	}
 	$scope.userDef = {
@@ -67,12 +67,10 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 		}, function( error, authData ) {
 			if ( error ) {
 				alert("Register Failed:" + error.message );
-				$scope.LogIn();
 			} else {
-				console.log("Authenticated successfully with payload:", authData);
+				alert("Register successfully!");
 				$scope.user.uid = authData.uid;
 				$scope.userList.$add( $scope.user );
-				$scope.LogIn();
 			}
 		});
 	}

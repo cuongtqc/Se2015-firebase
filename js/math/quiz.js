@@ -1,6 +1,7 @@
 var QuestArr = [];
 var avail = [];
 var choice = [];
+var QuizBank = [];
 
 var random = function( length ) {
 	return Math.floor( Math.random() * length ); 
@@ -39,16 +40,21 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 	$scope.editDB = true;
 	$scope.loaded = false;
 	$scope.index = 0;
-	$scope.list = [];
 	$scope.score = 0;
+	$scope.list = [];
 	
 	$scope.takeTest = function() {
 		$scope.editDB = false;
 	}
+	$scope.userDef = {
+		uid: "",
+		name: "",
+		score: 0
+	}
 	
 	// user control
 	$scope.name = "";
-	$scope.userIndex = 0;
+	$scope.userIndex = -1;
 	$scope.loged = ref.getAuth();
 	$scope.loaded = false;
 	var link = new Firebase("https://se15.firebaseio.com/users");
@@ -77,10 +83,11 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 	bank.$loaded(
 		function( data ) {
 			$scope.loaded = true;
-			$scope.max = Math.min( 10 , data.length );
-			init( data.length , $scope.max );
+			init( data.length , Math.min( 10 , data.length ) );
+			for( var i = 0; i < Math.min( 10 , data.length ); i ++ ) 
+				$scope.list.push( data[QuestArr[i]] );
 			$scope.currentQuestion = data[ QuestArr[0] ];
-			$scope.list = data;
+			QuizBank = data;
 		},
 		function(error) {
 			console.error("Error:", error);
@@ -100,28 +107,24 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 		choice[ QuestArr[$scope.index] ] = $scope.selected;
 		
 		/* next question */
-		if ( $scope.index <= $scope.max - 1 ) $scope.index ++; 
+		if ( $scope.index <= $scope.list.length - 1 ) $scope.index ++; 
 		$scope.currentQuestion = bank[ QuestArr[$scope.index] ];
 		
 		$scope.selected = -1; /* reset answer */
-		if ( $scope.index == $scope.max ) return $scope.submitTest(); /* if user submit the last question, return all answer and score */
+		if ( $scope.index == $scope.list.length ) return $scope.submitTest(); /* if user submit the last question, return all answer and score */
 	}
 	
 	/* publish score and question */
 	$scope.submitTest = function() {
 		$scope.publish = false;
-		userList.$loaded(
-			function( data ) {
-				userList[$scope.userIndex].score += $scope.score;
-				userList.$save( $scope.userIndex ).then( function() {
-					console.log( "Save user's score successfully!")
-				});
-				$scope.score = 0;
-			},
-			function(error) {
-				console.error("Error:", error);
-			}
-		);	
+		$scope.userIndex = $scope.getUser( ref.getAuth() );
+		if ( $scope.userIndex >= 0 ) {
+			userList[$scope.userIndex].score += $scope.score;
+			userList.$save( $scope.userIndex ).then( function() {
+				console.log( "Save user's score successfully!")
+			});
+			$scope.score = 0;
+		}	
 	}
 	
 	/* class for selected answer and right answer */
@@ -141,7 +144,9 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 		$scope.editDB = true;
 		$scope.index = 0;
 		$scope.score = 0;
-		regen( bank.length , $scope.max );
-		$scope.currentQuestion = bank[ QuestArr[0] ];
+		regen( bank.length , $scope.list.length );
+		for( var i = 0; i < $scope.list.length; i ++ ) 
+			$scope.list[i] = QuizBank[QuestArr[i]];
+		$scope.currentQuestion = QuizBank[ QuestArr[0] ];
 	}
 });

@@ -42,9 +42,9 @@
 			</div>
 		</div>
 		
-		<div ng-controller="QuestLibrary" class="container-fluid wow fadeInLeft" id="questionBoard">
+		<div ng-controller="QuestLibrary" class="container-fluid wow fadeInLeft" id="questionBoard" ng-show="loaded">
 			<div class="row" ng-show="editDB">
-				<a href="editMathQuestion.html" class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12">Edit question bank</a>
+				<a href="editMathQuiz.html" class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12">Edit question bank</a>
 				<div class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-click="takeTest()">Take test</div>
 			</div>
 			

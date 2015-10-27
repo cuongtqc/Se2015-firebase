@@ -53,7 +53,6 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 	$scope.userList.$loaded(
 		function( data ) {
 			$scope.user = $scope.getUser( $scope.loged );
-			console.log( $scope.loged );
 		},
 		function(error) {
 			console.error("Error:", error);
@@ -86,7 +85,6 @@ app.controller( 'LoginForm', function( $scope , $firebaseArray , $firebaseAuth )
 				if ( $scope.userList[i].uid == authData.uid ) {
 					$scope.user = $scope.userList[i];
 				}
-				console.log( $scope.user );
 				console.log("Log in successfully with payload:", authData);
 				$scope.$apply( function(){
 					$scope.loged = true;

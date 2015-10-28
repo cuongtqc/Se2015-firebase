@@ -87,8 +87,8 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 	);
 
 	// synchronize data from server. load được câu hỏi thì mới được lựa chọn take test.
-	var math = new Firebase("https://se15.firebaseio.com/math");
-	var bank = $firebaseArray( math );  
+	var travel = new Firebase("https://se15.firebaseio.com/football");
+	var bank = $firebaseArray( travel );  
 	bank.$loaded(
 		function( data ) {
 			$scope.loaded = true;
@@ -148,7 +148,7 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 		return ( $scope.getSel( index ) == index && $scope.getRight( index ) == index );
 	}
 	
-	/* Return mathQuiz index */
+	/* Return travelQuiz index */
 	$scope.ReturnQuiz = function() {
 		$scope.publish = true;
 		$scope.editDB = true;

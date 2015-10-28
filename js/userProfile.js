@@ -46,11 +46,14 @@ app.controller( 'UserProfile', function( $scope , $firebaseArray , $firebaseAuth
 			console.error("Error:", error);
 		}
 	);
+	
+	// clear thông tin đang điền hiện tại
 	$scope.clear = function() {
 		$scope.newPassword = "";
 		$scope.newPasswordCompare = "";
 		$scope.currentPassword = "";
 	}
+	
 	$scope.submit = function() {
 		if ( $scope.newPassword != "" && $scope.currentPassword != "" && $scope.newPassword == $scope.newPasswordCompare ) {
 			ref.changePassword({

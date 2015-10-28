@@ -87,8 +87,8 @@ app.controller( 'QuestLibrary' , function( $scope , $firebaseArray ) {
 	);
 
 	// synchronize data from server. load được câu hỏi thì mới được lựa chọn take test.
-	var math = new Firebase("https://se15.firebaseio.com/math");
-	var bank = $firebaseArray( math );  
+	var football = new Firebase("https://se15.firebaseio.com/football");
+	var bank = $firebaseArray( football );  
 	bank.$loaded(
 		function( data ) {
 			$scope.loaded = true;

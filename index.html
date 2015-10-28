@@ -6,15 +6,16 @@
         <link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/animate.min.css" />
 		<link rel="stylesheet" href="css/main.css" /> 
-
+		<!-- system javascript -->
 		<script src="js/system/jquery.min.js"> </script>
 		<script src="js/system/bootstrap.min.js"> </script>
 		<script src="js/system/angular.min.js"> </script>
 		<script src="js/system/angular-animate.min.js"> </script>
-		<script src="js/system/firebase.js"> </script>
 		<script src="js/system/wow.min.js"> </script>
+		<script src="js/system/firebase.js"> </script>
 		<script src="js/system/angularfire.min.js"> </script>
 		
+		<!-- custom javascript -->
 		<script src="js/main.js"> </script>
     </head>
 	
@@ -22,6 +23,7 @@
     <body ng-app="Quiz" class="container-fluid">
 	
 		<div id="LoginTab" ng-controller="LoginForm" class="container-fluid wow fadeInDown">
+			<!-- $scope.loged: biến cho biết user đã log in hay chưa. Phiên bản firebase phải đăng nhập bằng email -->
 			<div class="row" ng-hide="loged">
 				<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
 					<input type="email" class="form-control input-lg input-login" ng-model="username" placeholder="Email">
@@ -32,6 +34,8 @@
 				<button type="button" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="LogIn()">Log in</button>
 				<button type="submit" class="btn btn-lg btn-login col-lg-1 col-md-2 col-sm-6 col-xs-12" ng-click="Register()">Register</button>
 			</div>
+			
+			<!-- nếu đã login( in session ) thì sẽ thông báo xin chào. Tài khoản mới register cần vào profile chỉnh sửa thông tin cá nhân -->
 			<div class="row" ng-show="loged">
 				<div class="col-lg-10 col-md-8 col-sm-6 col-xs-6">
 					<p class="input-login"> Hi {{ user.name }} </p>
@@ -41,18 +45,20 @@
 			</div>
 		</div>
 		
+		<!-- Leaderboard: hiện ra 5 người có điểm cao nhất( sau này sẽ thêm tính năng điểm/ số bài test cao nhất )  -->
 		<div id="leaderboard" ng-controller="Leaderboard" class="container-fluid wow slideInLeft">
 				<p class="leaderboard-tittle">  Leaderboard </p>
 				<div class="row">
 					<p class="leaderboard-tittle col-lg-1 col-md-2 col-sm-3 col-xs-3"> Users </p>
 					<p class="leaderboard-tittle col-lg-1 col-md-2 col-sm-3 col-xs-3 col-lg-offset-10 col-md-offset-8 col-sm-offset-6 col-xs-offset-6"> Score </p>
 				</div>
-				<div ng-repeat="user in userList|orderBy:'-score'|limitTo:10" class="leaderboard-user">
+				<div ng-repeat="user in userList|orderBy:'-score'|limitTo:5" class="leaderboard-user">
 					<p class="col-lg-2 col-md-2 col-sm-3 col-xs-3"> {{user.name}} </p>
 					<p class="col-lg-1 col-md-1 col-sm-1 col-xs-2 col-lg-offset-9 col-md-offset-9 col-sm-offset-8 col-xs-offset-7"> {{user.score}} </p>
 				</div>
 		</div>
 	
+		<!-- Các loại bài test -->
 		<div ng-controller="TopicController" class="container-fluid wow slideInLeft">
 			<div class="row no-gutter">
 				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="topic in menu">

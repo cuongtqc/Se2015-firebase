@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!-- hoàn toàn giống math.quiz và các bài quiz khác, tách ra chỉ để kiểm soát dễ hơn. -->
 <html>
     <head>
 		<meta charset="UTF-8" />
@@ -18,7 +20,7 @@
 		
 		<!-- custom javascript -->
 		<script src="js/main.js"> </script>
-		<script src="js/math/quiz.js"> </script>
+		<script src="js/football/quiz.js"> </script>
     </head>
 	
     <body ng-app="Quiz" class="container-fluid">
@@ -43,7 +45,7 @@
 			</div>
 		</div>
 		
-		<img class="img-responsive" src="img/header/math.jpg">
+		<img class="img-responsive" src="img/header/football.jpg">
 		<!-- Lưu các bài test và các trạng thái của nó
 			editDB = true: lựa chọn giữa việc edit ques DB hay take test. Người dùng bth có thể vào trang edit DB nhưng ko thể thêm hay xóa được
 							( Nên sẽ chỉ để xem list là chính ). 
@@ -55,7 +57,7 @@
 		-->
 		<div ng-controller="QuestLibrary" class="container-fluid wow fadeInLeft" id="questionBoard" ng-show="loaded">
 			<div class="row" ng-show="editDB">
-				<a href="editMathQuiz.html" class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12">Edit question bank</a>
+				<a href="editFootballQuiz.html" class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12">Edit question bank</a>
 				<div class="btn btn-answer btn-lg col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-click="takeTest()">Take test</div>
 			</div>
 			
